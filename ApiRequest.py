@@ -18,6 +18,7 @@ def auslastung(clubNumber):
     return auslastung
 
 if __name__ == "__main__":
+    #GET UTILIZATION
     auslastungGedarmenmarkt = auslastung(clubNumber="berlin12")
     auslastungPrenzlauerBerg = auslastung(clubNumber="berlin2")
     auslastungSteglitz = auslastung(clubNumber="berlin3")
