@@ -29,7 +29,7 @@ if __name__ == "__main__":
     auslastungZehlendorf = auslastung(clubnumber="berlin11")
     # Get time only
     timeCode = datetime.datetime.now()
-    currentTime = timeCode.strftime("%H:%M:%S")
+    currentTime = timeCode.strftime("%H:%M")
 
     # Copy data to database
     cur.execute(f'''INSERT INTO fitnessFirstAuslastung VALUES ('{currentTime}',
