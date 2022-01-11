@@ -31,7 +31,6 @@ if __name__ == "__main__":
     timeCode = datetime.datetime.now()
     currentTime = timeCode.strftime("%H:%M:%S")
 
-
     # Copy data to database
     cur.execute(f'''INSERT INTO fitnessFirstAuslastung VALUES ('{currentTime}',
     '{auslastungGedarmenmarkt}',
