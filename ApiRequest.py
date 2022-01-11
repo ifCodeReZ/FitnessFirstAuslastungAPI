@@ -1,10 +1,11 @@
+import datetime
 import sqlite3
 import requests
-from datetime import datetime
-
+import datetime
 
 # Create Database
-con = sqlite3.connect('database.db')
+datum = datetime.date.today()
+con = sqlite3.connect(f'database{datum}.db')
 cur = con.cursor()
 cur.execute('''CREATE TABLE IF NOT EXISTS fitnessFirstAuslastung (
 Zeit text, Gendarmenmarkt double, PrenzlauerBerg double, Steglitz double, Wilmersdorf double, Zehlendorf double)''')
@@ -28,7 +29,7 @@ if __name__ == "__main__":
     auslastungWilmersdorf = auslastung(clubnumber="berlin10")
     auslastungZehlendorf = auslastung(clubnumber="berlin11")
     # Get time and date
-    datumZeit = datetime.today()
+    datumZeit = datetime.datetime.now()
     # Copy data to database
     cur.execute(f'''INSERT INTO fitnessFirstAuslastung VALUES ('{datumZeit}',
     '{auslastungGedarmenmarkt}',
