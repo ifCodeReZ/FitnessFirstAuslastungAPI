@@ -27,10 +27,13 @@ if __name__ == "__main__":
     auslastungSteglitz = auslastung(clubnumber="berlin3")
     auslastungWilmersdorf = auslastung(clubnumber="berlin10")
     auslastungZehlendorf = auslastung(clubnumber="berlin11")
-    # Get time and date
-    datumZeit = datetime.datetime.now()
+    # Get time only
+    timeCode = datetime.datetime.now()
+    currentTime = timeCode.strftime("%H:%M:%S")
+
+
     # Copy data to database
-    cur.execute(f'''INSERT INTO fitnessFirstAuslastung VALUES ('{datumZeit}',
+    cur.execute(f'''INSERT INTO fitnessFirstAuslastung VALUES ('{currentTime}',
     '{auslastungGedarmenmarkt}',
     '{auslastungPrenzlauerBerg}',
     '{auslastungSteglitz}',
