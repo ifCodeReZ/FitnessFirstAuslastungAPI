@@ -3,11 +3,13 @@ import requests
 import datetime
 
 # Create Database
-datum = datetime.date.today()
-con = sqlite3.connect(f'database{datum}.db')
-cur = con.cursor()
-cur.execute('''CREATE TABLE IF NOT EXISTS fitnessFirstAuslastung (
-Zeit text, Gendarmenmarkt double, PrenzlauerBerg double, Steglitz double, Wilmersdorf double, Zehlendorf double)''')
+dateObj = datetime.date.today()
+dateStr = dateObj.strftime("%d%b%Y")
+con = sqlite3.connect(f'database.db')
+db = con.cursor()
+db.execute("CREATE TABLE IF NOT EXISTS Auslastung" + dateStr + "(Zeit text, Gendarmenmarkt double, PrenzlauerBerg "
+                                                               "double, Steglitz double, Wilmersdorf double, "
+                                                               "Zehlendorf double)")
 
 
 # API-Request @param clubNumber, @return utilization
@@ -32,7 +34,7 @@ if __name__ == "__main__":
     currentTime = timeCode.strftime("%H:%M")
 
     # Copy data to database
-    cur.execute(f'''INSERT INTO fitnessFirstAuslastung VALUES ('{currentTime}',
+    db.execute(f'''INSERT INTO Auslastung{dateStr} VALUES ('{currentTime}',
     '{auslastungGedarmenmarkt}',
     '{auslastungPrenzlauerBerg}',
     '{auslastungSteglitz}',
