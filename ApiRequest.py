@@ -2,6 +2,12 @@ import sqlite3
 import requests
 import datetime
 
+# Get time only
+timeCode = datetime.datetime.now()
+currentTime = timeCode.strftime("%H:%M")
+currentHourStr = timeCode.strftime("%H")
+currentHour = int(currentHourStr)
+print(currentHour)
 # Create Database
 dateObj = datetime.date.today()
 dateStr = dateObj.strftime("%d%b%Y")
@@ -29,15 +35,15 @@ if __name__ == "__main__":
     auslastungSteglitz = auslastung(clubnumber="berlin3")
     auslastungWilmersdorf = auslastung(clubnumber="berlin10")
     auslastungZehlendorf = auslastung(clubnumber="berlin11")
-    # Get time only
-    timeCode = datetime.datetime.now()
-    currentTime = timeCode.strftime("%H:%M")
 
-    # Copy data to database
-    db.execute(f'''INSERT INTO Auslastung{dateStr} VALUES ('{currentTime}',
-    '{auslastungGedarmenmarkt}',
-    '{auslastungPrenzlauerBerg}',
-    '{auslastungSteglitz}',
-    '{auslastungWilmersdorf}',
-    '{auslastungZehlendorf}')''')
-    con.commit()
+    # Check Time and Copy data to database
+    if 23 > currentHour > 5:
+        db.execute(f'''INSERT INTO Auslastung{dateStr} VALUES ('{currentTime}',
+        '{auslastungGedarmenmarkt}',
+        '{auslastungPrenzlauerBerg}',
+        '{auslastungSteglitz}',
+        '{auslastungWilmersdorf}',
+        '{auslastungZehlendorf}')''')
+        con.commit()
+    else:
+        exit()
