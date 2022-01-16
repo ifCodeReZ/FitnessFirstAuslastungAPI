@@ -2,18 +2,20 @@ import mysql.connector
 import requests
 import datetime
 
-# Get time only
+# Get current hour
 timeCode = datetime.datetime.now()
 currentTime = timeCode.strftime("%H:%M")
 currentHourStr = timeCode.strftime("%H")
 currentHour = int(currentHourStr)
-print(currentHour)
-# Create Database
+
+# Create Date-String
 dateObj = datetime.date.today()
 dateStr = dateObj.strftime("%d%b%Y")
+# Connect to mySQL-Database
 mydb = mysql.connector.connect(user='USER', password='PASSWORD',
                                host='HOSTIP',
                                database='DATABASE')
+# Create Table and DB-Cursor
 dbcursor = mydb.cursor()
 dbcursor.execute(
     "CREATE TABLE IF NOT EXISTS Auslastung" + dateStr + "(Zeit text, Gendarmenmarkt double, PrenzlauerBerg "
